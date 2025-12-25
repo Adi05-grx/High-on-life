@@ -2,24 +2,129 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>For You</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <title>For You, Sankhu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: linear-gradient(180deg, #050505, #0c0c0c);
+      color: #f5f5f5;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      max-width: 700px;
+      padding: 40px;
+      text-align: center;
+      animation: fadeIn 2s ease;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      margin-bottom: 25px;
+      font-weight: 600;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.8;
+      opacity: 0.9;
+      margin-bottom: 30px;
+    }
+
+    input {
+      padding: 12px;
+      width: 70%;
+      max-width: 300px;
+      border-radius: 25px;
+      border: none;
+      outline: none;
+      text-align: center;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    button {
+      padding: 10px 30px;
+      border-radius: 25px;
+      border: none;
+      background: #ffffff;
+      color: #000;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: #ddd;
+    }
+
+    .error {
+      color: #ff6b6b;
+      font-size: 14px;
+      margin-top: 10px;
+      display: none;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
+
 <body>
+  <div class="container">
+    <h1>For You</h1>
 
-<section class="song" style="background-image: url('assets/images/covers/high-on-life.jpg')">
-  <div class="song-content">
-    <h1>High On Life</h1>
     <p>
-      And I’d walk a million miles just to see you smile…  
-      I need you by my side, we get high on life till the day we die.
-    </p>
-  </div>
-</section>
+      I’m not a poet, and I don’t know how to write shayari.<br>
+      But I know music.<br><br>
 
-<script src="script.js"></script>
+      And somehow, every time I hear certain songs, I see you —
+      your smile, your silence, your strength, your love, your softness.<br><br>
+
+      So I tried to put my feelings into something I understand — songs.
+      Each one of them carries a piece of my love & feelings for you.<br><br>
+
+      This is not a playlist.<br>
+      This is my heart, translated into music.<br><br>
+
+      If you’re here, it means I succeeded creating this.
+      Please enter the secret password I shared with you…
+    </p>
+
+    <input type="password" id="password" placeholder="Enter the secret password" />
+    <br>
+    <button onclick="checkPassword()">Enter</button>
+
+    <div class="error" id="error">That’s not the right password.</div>
+  </div>
+
+  <script>
+    function checkPassword() {
+      const password = document.getElementById("password").value;
+      const error = document.getElementById("error");
+
+      // CHANGE THIS PASSWORD
+      const correctPassword = "sankhu";
+
+      if (password === correctPassword) {
+        window.location.href = "songs.html";
+      } else {
+        error.style.display = "block";
+      }
+    }
+  </script>
 </body>
 </html>
-<img src="assets/images/high_on_life.jpg" alt="High On Life">
-<img src="assets/images/wherever_you_are.jpg" alt="Wherever you are">
