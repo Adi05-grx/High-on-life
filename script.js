@@ -1,26 +1,20 @@
-const contents = document.querySelectorAll(".song-content");
+// Fade-in animation on scroll for song sections
 
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("show");
+document.addEventListener("DOMContentLoaded", () => {
+  const elements = document.querySelectorAll(".fade");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    },
+    {
+      threshold: 0.2,
     }
-  });
-}, { threshold: 0.3 });
+  );
 
-contents.forEach(content => {
-  observer.observe(content);
+  elements.forEach((el) => observer.observe(el));
 });
-// Fade-in on scroll
-const observer = new IntersectionObserver(
-  entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("show");
-      }
-    });
-  },
-  { threshold: 0.15 }
-);
-
-document.querySelectorAll(".fade").forEach(el => observer.observe(el));
