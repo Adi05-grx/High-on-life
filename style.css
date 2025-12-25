@@ -1,0 +1,50 @@
+body {
+  margin: 0;
+  font-family: 'Georgia', serif;
+  background: black;
+  color: white;
+}
+
+.lock-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: radial-gradient(circle at top, #111, #000);
+}
+
+.lock-box {
+  text-align: center;
+  padding: 40px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.lock-box h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.lock-box input {
+  padding: 10px;
+  width: 220px;
+  border-radius: 6px;
+  border: none;
+  margin-top: 10px;
+}
+
+.lock-box button {
+  margin-top: 15px;
+  padding: 10px 30px;
+  background: white;
+  color: black;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#error {
+  margin-top: 10px;
+  color: #ff6b6b;
+}
