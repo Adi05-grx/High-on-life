@@ -2,24 +2,51 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Our Songs</title>
+  <title>For You — Songs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-  <div class="songs-wrapper">
 
-    <!-- SONG 1 -->
+  <!-- TRANSITION / MESSAGE SCREEN -->
+  <section id="intro-screen" class="intro-screen">
+    <div class="intro-content">
+      <h1>Before the music starts…</h1>
+
+      <p>
+        These songs are not random.<br><br>
+        Each one holds a moment, a feeling, a memory of you.<br><br>
+        Some talk about love, some about distance, some about hope —
+        but all of them lead back to the same place.<br><br>
+        <strong>You.</strong>
+      </p>
+
+      <p class="hint">
+        Press <span>ENTER</span> when you’re ready.
+      </p>
+    </div>
+  </section>
+
+  <!-- SONGS CONTAINER (HIDDEN INITIALLY) -->
+  <div id="songs-wrapper" class="songs-wrapper hidden">
+
+    <!-- SONG 1 : HIGH ON LIFE -->
     <section class="song fade">
-      <img src="assets/images/love.jpg" alt="High On Life">
-      <div class="song-text">
+      <div class="song-bg" style="background-image: url('assets/images/love.jpg');"></div>
+
+      <div class="song-content">
+        <img src="assets/images/love.jpg" alt="High On Life">
+
         <h2>High On Life — Martin Garrix</h2>
-        <p>
+
+        <p class="lyrics">
           And I walk a million miles just to see you smile till the day I die…<br>
-          Oh I need you by my side, we get high on life till the day we die.
+          Oh I need you by my side,<br>
+          We get high on life till the day we die.
         </p>
       </div>
     </section>
@@ -28,3 +55,4 @@
 
   <script src="script.js"></script>
 </body>
+</html>
