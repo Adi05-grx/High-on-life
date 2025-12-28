@@ -363,3 +363,46 @@ body::after {
   line-height: 1.8;
   opacity: 0.9;
 }
+/* SONG BACKGROUND MOODS */
+
+.song {
+  min-height: 100vh;
+  padding: 80px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: background 1.5s ease;
+}
+
+.song[data-mood="rose"] {
+  background: radial-gradient(circle at top, #3b1c2a, #0b0508);
+}
+
+.song[data-mood="amber"] {
+  background: radial-gradient(circle at top, #3a2a14, #0b0803);
+}
+
+.song[data-mood="crimson"] {
+  background: radial-gradient(circle at top, #3a0f18, #050102);
+}
+
+.song[data-mood="deepblue"] {
+  background: radial-gradient(circle at top, #0d1b2a, #020509);
+}
+
+.song[data-mood="teal"] {
+  background: radial-gradient(circle at top, #0d2b2b, #020707);
+}
+
+.song[data-mood="violet"] {
+  background: radial-gradient(circle at top, #23122e, #050207);
+}
+
+.song[data-mood="gold"] {
+  background: radial-gradient(circle at top, #3a2f0f, #050402);
+}
+
+.song[data-mood="midnight"] {
+  background: radial-gradient(circle at top, #05070d, #000000);
+}
