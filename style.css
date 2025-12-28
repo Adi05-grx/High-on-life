@@ -302,3 +302,64 @@ body::after {
   opacity: 1;
   transform: translateY(0);
 }
+.song {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.song::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--bg-image);
+  background-size: cover;
+  background-position: center;
+  filter: blur(60px) brightness(0.4);
+  transform: scale(1.2);
+  z-index: 1;
+}
+
+.song::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(0,0,0,0.2),
+    rgba(0,0,0,0.9)
+  );
+  z-index: 2;
+}
+
+.song-content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  padding: 120px;
+}
+
+.song-content img {
+  width: 280px;
+  border-radius: 14px;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+}
+
+.song-text {
+  max-width: 500px;
+  color: #fff;
+}
+
+.song-text h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 30px;
+  margin-bottom: 15px;
+}
+
+.song-text p {
+  font-size: 16px;
+  line-height: 1.8;
+  opacity: 0.9;
+}
