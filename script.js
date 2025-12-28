@@ -1,7 +1,20 @@
-// Fade-in animation on scroll for song sections
-
 document.addEventListener("DOMContentLoaded", () => {
-  const elements = document.querySelectorAll(".fade");
+  const introScreen = document.getElementById("intro-screen");
+  const songsWrapper = document.getElementById("songs-wrapper");
+
+  // ENTER key to start experience
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !introScreen.classList.contains("hidden")) {
+      introScreen.classList.add("hidden");
+      songsWrapper.classList.remove("hidden");
+      document.body.style.overflow = "auto";
+    }
+  });
+
+  // Fade-in animation for story + song screens
+  const fadeElements = document.querySelectorAll(
+    ".story-screen, .song-screen"
+  );
 
   const observer = new IntersectionObserver(
     (entries) => {
@@ -11,10 +24,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
     },
-    {
-      threshold: 0.2,
-    }
+    { threshold: 0.15 }
   );
 
-  elements.forEach((el) => observer.observe(el));
+  fadeElements.forEach((el) => observer.observe(el));
 });
