@@ -18,9 +18,9 @@
     <h1>Before the music starts…</h1>
     <p>
       These songs are not random.<br><br>
-      Each one carries a piece of my heart.<br>
-      Every feeling leads back to the same place.<br><br>
-      <strong>You.</strong>
+      Each one holds a moment, a feeling, a memory of you.<br><br>
+      They all lead back to the same place.<br><br>
+      <strong>YOU ❤️</strong>
     </p>
     <p class="hint">Press <span>ENTER</span></p>
   </div>
@@ -33,9 +33,9 @@
   <section class="story-screen">
     <p>
       Before I knew love,<br>
-      there was only a feeling…<br><br>
-      that someday,<br>
-      someone would change everything.
+      before I knew what it felt like…<br><br>
+      there was just a feeling —
+      that someone would change everything.
     </p>
   </section>
 
@@ -56,9 +56,9 @@
   <!-- MESSAGE -->
   <section class="story-screen">
     <p>
-      I was never searching for perfection.<br>
+      I was never looking for perfection.<br>
       Just someone real.<br><br>
-      And somehow… that was you.
+      And that was you.
     </p>
   </section>
 
@@ -69,8 +69,9 @@
       <div class="song-text">
         <h2>Something Just Like This — Coldplay</h2>
         <p>
-          I’m not looking for somebody with some superhero gifts…<br>
-          Just someone I can turn to, somebody I can kiss.
+          Just someone I can turn to,<br>
+          somebody I can kiss.<br>
+          I want something just like this.
         </p>
       </div>
     </div>
@@ -78,6 +79,14 @@
 
 </div>
 
-<script src="script.js"></script>
+<script>
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+      document.getElementById("intro-screen").style.display = "none";
+      document.getElementById("songs-wrapper").classList.remove("hidden");
+    }
+  });
+</script>
+
 </body>
 </html>
