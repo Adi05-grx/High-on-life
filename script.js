@@ -98,3 +98,62 @@ document.addEventListener("DOMContentLoaded", () => {
     return rect.top >= 0 && rect.top <= window.innerHeight * 0.7;
   }
 });
+
+/* ================= ACT DIVIDER SCROLL LOCK ================= */
+
+const actDividers = document.querySelectorAll(".act-divider");
+let scrollLocked = false;
+
+// Lock scroll
+function lockScroll() {
+  if (scrollLocked) return;
+  scrollLocked = true;
+  document.body.classList.add("lock-scroll");
+}
+
+// Unlock scroll
+function unlockScroll() {
+  scrollLocked = false;
+  document.body.classList.remove("lock-scroll");
+}
+
+// Observe dividers
+const dividerObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        lockScroll();
+      }
+    });
+  },
+  { threshold: 0.6 }
+);
+
+actDividers.forEach(divider => dividerObserver.observe(divider));
+
+// Click → unlock + move forward
+document.querySelectorAll(".next-act-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    unlockScroll();
+
+    const nextSection = btn.closest(".act-divider")?.nextElementSibling;
+    nextSection?.scrollIntoView({ behavior: "smooth" });
+  });
+});
+
+// Keyboard → support
+document.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowRight" && scrollLocked) {
+    unlockScroll();
+
+    const visibleDivider = [...actDividers].find(isElementInViewport);
+    const nextSection = visibleDivider?.nextElementSibling;
+    nextSection?.scrollIntoView({ behavior: "smooth" });
+  }
+});
+
+// Helper
+function isElementInViewport(el) {
+  const rect = el.getBoundingClientRect();
+  return rect.top < window.innerHeight * 0.6 && rect.bottom > window.innerHeight * 0.4;
+}
