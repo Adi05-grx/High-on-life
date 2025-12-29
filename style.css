@@ -1,4 +1,4 @@
-/* RESET */
+/* ================= RESET ================= */
 * {
   margin: 0;
   padding: 0;
@@ -16,12 +16,12 @@ body {
   overflow-x: hidden;
 }
 
-/* HIDDEN */
+/* ================= HIDDEN ================= */
 .hidden {
   display: none;
 }
 
-/* INTRO SCREEN */
+/* ================= INTRO SCREEN ================= */
 .intro-screen {
   height: 100vh;
   display: flex;
@@ -56,7 +56,7 @@ body {
   border-radius: 6px;
 }
 
-/* STORY SCREENS */
+/* ================= STORY SCREENS ================= */
 .story-screen {
   min-height: 100vh;
   display: flex;
@@ -67,8 +67,8 @@ body {
   font-size: 20px;
   background: #050505;
   opacity: 0;
-  transform: translateY(30px);
-  transition: all 1.6s ease;
+  transform: translateY(40px);
+  transition: all 1.4s ease;
 }
 
 .story-screen.show {
@@ -76,16 +76,17 @@ body {
   transform: translateY(0);
 }
 
-/* SONG SCREENS */
+/* ================= SONG SCREENS ================= */
 .song-screen {
   min-height: 100vh;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 60px 20px;
   opacity: 0;
   transform: translateY(40px);
-  transition: all 1.8s ease;
+  transition: all 1.4s ease;
 }
 
 .song-screen.show {
@@ -93,12 +94,14 @@ body {
   transform: translateY(0);
 }
 
-/* SONG CONTENT */
+/* ================= SONG CONTENT ================= */
 .song-content {
   display: flex;
   gap: 40px;
   max-width: 900px;
   align-items: center;
+  position: relative;
+  z-index: 2;
 }
 
 .song-content img {
@@ -119,7 +122,34 @@ body {
   opacity: 0.9;
 }
 
-/* MOOD BACKGROUNDS */
+/* ================= COLOR MOODS (FIXED) ================= */
 .mood-rose {
   background: radial-gradient(circle at top, #402030, #0b0508);
+}
+
+.mood-blue {
+  background: radial-gradient(circle at top, #1e2a44, #05070d);
+}
+
+.mood-lavender {
+  background: radial-gradient(circle at top, #2a1e3d, #07040b);
+}
+
+.mood-amber {
+  background: radial-gradient(circle at top, #3a2a14, #0b0803);
+}
+
+.mood-soft-gold {
+  background: radial-gradient(circle at top, #3a2f0f, #050402);
+}
+
+/* ================= SOFT FILM GRAIN ================= */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 999;
 }
