@@ -70,6 +70,12 @@ document.addEventListener("keydown", (e) => {
     if (act1Divider && isElementInViewport(act1Divider)) {
       goToNextAct();
     }
+    });
+function goToAct2() {
+  const act2Start = document.querySelector("#act-2-start");
+  if (act2Start) {
+    act2Start.scrollIntoView({ behavior: "smooth" });
+  }
 // ================= ACT DIVIDER LOGIC =================
 
 const act1Divider = document.getElementById("act1-divider");
