@@ -27,3 +27,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   elements.forEach(el => observer.observe(el));
 });
+// ================= AMBIENT TRANSITION SOUND =================
+let ambientPlayed = false;
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !ambientPlayed) {
+    const audio = new Audio("assets/audio/ambient.mp3");
+    audio.volume = 0.25;
+    audio.play().catch(() => {});
+    ambientPlayed = true;
+  }
+});
