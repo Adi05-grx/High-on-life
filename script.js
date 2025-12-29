@@ -36,35 +36,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
   elements.forEach(el => observer.observe(el));
 
-  /* ================= ACT DIVIDER SOUND & NAVIGATION ================= */
-  const actSound = new Audio("assets/sounds/transition.mp3");
-  actSound.volume = 0.25;
+  // ================= ACT NAVIGATION & SCROLL LOCK =================
 
-  function goToNextAct() {
-    actSound.play().catch(() => {});
-    
-    // If you have a second page for Act 2, uncomment the line below:
-    // window.location.href = "act2.html"; 
+const heartbeat = new Audio("assets/sounds/heartbeat.mp3");
+heartbeat.volume = 0.25;
 
-    // Otherwise, scroll to next element if it exists
-    const next = act1Divider?.nextElementSibling;
-    if (next) {
-      next.scrollIntoView({ behavior: "smooth" });
-    }
+// Lock scroll initially after ACT 1
+let scrollLocked = true;
+document.body.style.overflowY = "hidden";
+
+// Unlock + move to ACT 2
+const act1Divider = document.getElementById("act1-divider");
+const act2Start = document.getElementById("act-2-start");
+const act1Btn = act1Divider?.querySelector(".next-act-btn");
+
+function unlockAndGoToAct2() {
+  heartbeat.currentTime = 0;
+  heartbeat.play().catch(() => {});
+  scrollLocked = false;
+  document.body.style.overflowY = "auto";
+
+  act2Start.classList.remove("hidden");
+  act2Start.scrollIntoView({ behavior: "smooth" });
+}
+
+act1Btn?.addEventListener("click", unlockAndGoToAct2);
+
+// Keyboard →
+document.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowRight" && scrollLocked) {
+    unlockAndGoToAct2();
   }
-
-  /* Click support */
-  nextActBtn?.addEventListener("click", goToNextAct);
-
-  /* → key support */
-  document.addEventListener("keydown", (e) => {
-    // Only trigger if the divider is actually visible on screen
-    if (e.key === "ArrowRight" && act1Divider) {
-      const rect = act1Divider.getBoundingClientRect();
-      const isVisible = rect.top < window.innerHeight && rect.bottom >= 0;
-      if (isVisible) {
-        goToNextAct();
-      }
-    }
-  });
 });
