@@ -1,4 +1,4 @@
-/* RESET */
+/* ===== RESET ===== */
 * {
   margin: 0;
   padding: 0;
@@ -13,20 +13,20 @@ html, body {
   overflow-x: hidden;
 }
 
-/* HIDDEN */
-.hidden {
-  display: none;
-}
-
-/* INTRO SCREEN */
+/* ===== INTRO SCREEN ===== */
 .intro-screen {
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 40px;
   background: radial-gradient(circle at top, #111, #000);
+}
+
+.intro-content {
+  max-width: 700px;
+  padding: 40px;
+  animation: fadeIn 2s ease;
 }
 
 .intro-content h1 {
@@ -36,7 +36,7 @@ html, body {
 }
 
 .intro-content p {
-  max-width: 700px;
+  font-size: 16px;
   line-height: 1.8;
   opacity: 0.9;
 }
@@ -53,7 +53,7 @@ html, body {
   border-radius: 6px;
 }
 
-/* STORY SCREENS */
+/* ===== STORY SCREENS ===== */
 .story-screen {
   min-height: 100vh;
   display: flex;
@@ -73,7 +73,7 @@ html, body {
   transform: translateY(0);
 }
 
-/* SONG SCREENS */
+/* ===== SONG SCREENS ===== */
 .song-screen {
   min-height: 100vh;
   display: flex;
@@ -90,7 +90,7 @@ html, body {
   transform: translateY(0);
 }
 
-/* SONG CONTENT */
+/* ===== SONG CONTENT ===== */
 .song-content {
   display: flex;
   gap: 40px;
@@ -107,7 +107,7 @@ html, body {
 .song-text h2 {
   font-family: 'Playfair Display', serif;
   font-size: 28px;
-  margin-bottom: 16px;
+  margin-bottom: 15px;
 }
 
 .song-text p {
@@ -116,7 +116,7 @@ html, body {
   opacity: 0.9;
 }
 
-/* MOOD BACKGROUNDS */
+/* ===== MOOD BACKGROUNDS ===== */
 .mood-rose {
   background: radial-gradient(circle at top, #402030, #0b0508);
 }
@@ -125,10 +125,24 @@ html, body {
   background: radial-gradient(circle at top, #1e2a44, #05070d);
 }
 
+.mood-lavender {
+  background: radial-gradient(circle at top, #2a1e44, #070510);
+}
+
 .mood-amber {
   background: radial-gradient(circle at top, #3a2a14, #050402);
 }
 
 .mood-soft-gold {
-  background: radial-gradient(circle at top, #3a2f0f, #050402);
+  background: radial-gradient(circle at top, #3a3218, #050403);
+}
+
+/* ===== UTIL ===== */
+.hidden {
+  display: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
