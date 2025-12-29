@@ -291,6 +291,20 @@ body::after {
     transform: translateY(0);
   }
 }
+/* ================= STRONG ACT DIVIDER ================= */
+
+.act-divider.strong {
+  background: radial-gradient(
+    circle at center,
+    #18060a,
+    #020000
+  );
+}
+
+.act-divider.strong p {
+  font-size: 22px;
+  letter-spacing: 0.4px;
+}
 
 
 
