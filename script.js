@@ -2,17 +2,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const introScreen = document.getElementById("intro-screen");
   const songsWrapper = document.getElementById("songs-wrapper");
 
-  // Start experience on ENTER
+  // ENTER key to start experience
   document.addEventListener("keydown", (e) => {
     if (e.key === "Enter" && !introScreen.classList.contains("hidden")) {
       introScreen.classList.add("hidden");
       songsWrapper.classList.remove("hidden");
-      document.body.style.overflowY = "auto";
+      document.body.style.overflow = "auto";
     }
   });
 
-  // Fade-in animation
-  const elements = document.querySelectorAll(".story-screen, .song-screen");
+  // Fade-in animation for story + song screens
+  const fadeElements = document.querySelectorAll(
+    ".story-screen, .song-screen"
+  );
 
   const observer = new IntersectionObserver(
     (entries) => {
@@ -25,5 +27,5 @@ document.addEventListener("DOMContentLoaded", () => {
     { threshold: 0.15 }
   );
 
-  elements.forEach((el) => observer.observe(el));
+  fadeElements.forEach((el) => observer.observe(el));
 });
