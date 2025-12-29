@@ -1,18 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
   const introScreen = document.getElementById("intro-screen");
   const songsWrapper = document.getElementById("songs-wrapper");
+  const act1Divider = document.getElementById("act1-divider");
+  const nextActBtn = document.querySelector(".next-act-btn");
 
-  // ENTER to start
+  /* ================= INTRO ENTER ================= */
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" && !introScreen.classList.contains("hidden")) {
+    if (e.key === "Enter" && introScreen && !introScreen.classList.contains("hidden")) {
       introScreen.classList.add("hidden");
       songsWrapper.classList.remove("hidden");
       document.body.style.overflowY = "auto";
     }
   });
 
-  // Fade-in observer
-  const elements = document.querySelectorAll(".story-screen, .song-screen");
+  /* ================= FADE IN OBSERVER ================= */
+  const elements = document.querySelectorAll(".story-screen, .song-screen, .act-divider");
 
   const observer = new IntersectionObserver(
     (entries) => {
@@ -26,98 +28,29 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
   elements.forEach(el => observer.observe(el));
-});
-// ================= AMBIENT TRANSITION SOUND =================
-let ambientPlayed = false;
 
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Enter" && !ambientPlayed) {
-    const audio = new Audio("assets/audio/ambient.mp3");
-    audio.volume = 0.25;
-    audio.play().catch(() => {});
-    ambientPlayed = true;
-  }
-// ================= ACT DIVIDER LOGIC =================
+  /* ================= ACT DIVIDER SOUND ================= */
+  const actSound = new Audio("assets/sounds/transition.mp3");
+  actSound.volume = 0.25;
 
-const act1Divider = document.getElementById("act1-divider");
-const nextActBtn = document.querySelector(".next-act-btn");
-
-// Ambient click sound
-const actSound = new Audio("assets/sounds/transition.mp3");
-actSound.volume = 0.25;
-
-function goToNextAct() {
-  actSound.play();
-  act1Divider.scrollIntoView({
-    behavior: "smooth",
-    block: "end"
-  });
-
-  // Scroll to next section after divider
-  setTimeout(() => {
-    act1Divider.nextElementSibling?.scrollIntoView({
-      behavior: "smooth"
-    });
-  }, 700);
-}
-
-// Click support
-nextActBtn?.addEventListener("click", goToNextAct);
-
-// Keyboard → support
-document.addEventListener("keydown", (e) => {
-  if (e.key === "ArrowRight") {
-    if (act1Divider && isElementInViewport(act1Divider)) {
-      goToNextAct();
-    }
-    });
-function goToAct2() {
-  const act2Start = document.querySelector("#act-2-start");
-  if (act2Start) {
-    act2Start.scrollIntoView({ behavior: "smooth" });
-  }
-// ================= ACT DIVIDER LOGIC =================
-
-const act1Divider = document.getElementById("act1-divider");
-const nextActBtn = document.querySelector(".next-act-btn");
-
-// Ambient click sound
-const actSound = new Audio("assets/sounds/transition.mp3");
-actSound.volume = 0.25;
-
-function goToNextAct() {
-  actSound.play();
-  act1Divider.scrollIntoView({
-    behavior: "smooth",
-    block: "end"
-  });
-
-  // Scroll to next section after divider
-  setTimeout(() => {
-    act1Divider.nextElementSibling?.scrollIntoView({
-      behavior: "smooth"
-    });
-  }, 700);
-}
-
-// Click support
-nextActBtn?.addEventListener("click", goToNextAct);
-
-// Keyboard → support
-document.addEventListener("keydown", (e) => {
-  if (e.key === "ArrowRight") {
-    if (act1Divider && isElementInViewport(act1Divider)) {
-      goToNextAct();
+  function goToNextAct() {
+    actSound.play().catch(() => {});
+    const next = act1Divider?.nextElementSibling;
+    if (next) {
+      next.scrollIntoView({ behavior: "smooth" });
     }
   }
+
+  /* Click support */
+  nextActBtn?.addEventListener("click", goToNextAct);
+
+  /* → key support */
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight" && act1Divider) {
+      const rect = act1Divider.getBoundingClientRect();
+      if (rect.top >= 0 && rect.bottom <= window.innerHeight + 150) {
+        goToNextAct();
+      }
+    }
+  });
 });
-
-// Helper
-function isElementInViewport(el) {
-  const rect = el.getBoundingClientRect();
-  return rect.top >= 0 && rect.bottom <= window.innerHeight + 100;
-}
-
-
-
-
