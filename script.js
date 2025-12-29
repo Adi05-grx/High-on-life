@@ -39,8 +39,8 @@ document.addEventListener("keydown", (e) => {
   }
 });
 function goToAct2() {
-  const act2 = document.getElementById("act2-start");
-  if (act2) {
-    act2.scrollIntoView({ behavior: "smooth" });
+  const act2Start = document.querySelector("#act-2-start");
+  if (act2Start) {
+    act2Start.scrollIntoView({ behavior: "smooth" });
   }
 }
