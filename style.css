@@ -68,7 +68,7 @@ body {
   background: #050505;
   opacity: 0;
   transform: translateY(30px);
-  transition: all 1.2s ease;
+  transition: all 1.6s ease;
 }
 
 .story-screen.show {
@@ -85,7 +85,7 @@ body {
   padding: 60px 20px;
   opacity: 0;
   transform: translateY(40px);
-  transition: all 1.4s ease;
+  transition: all 1.8s ease;
 }
 
 .song-screen.show {
@@ -122,20 +122,4 @@ body {
 /* MOOD BACKGROUNDS */
 .mood-rose {
   background: radial-gradient(circle at top, #402030, #0b0508);
-}
-
-.mood-blue {
-  background: radial-gradient(circle at top, #1e2a44, #05070d);
-}
-
-.mood-lavender {
-  background: radial-gradient(circle at top, #2a1e3d, #07040b);
-}
-
-.mood-amber {
-  background: radial-gradient(circle at top, #3a2a14, #0b0803);
-}
-
-.mood-soft-gold {
-  background: radial-gradient(circle at top, #3a2f0f, #050402);
 }
