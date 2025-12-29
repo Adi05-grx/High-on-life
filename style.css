@@ -170,6 +170,16 @@ body {
   background: radial-gradient(circle at top, #23122e, #050207);
 }
 
+
+.mood-midnight {
+  background: radial-gradient(circle at top, #0b1320, #020409);
+}
+
+.mood-teal {
+  background: radial-gradient(circle at top, #0d2b2b, #020707);
+}
+
+
 /* ================= SOFT FILM GRAIN ================= */
 body::after {
   content: "";
