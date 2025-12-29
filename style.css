@@ -215,4 +215,45 @@ body::after {
     padding: 30px;
   }
 }
+/* ================= ACT DIVIDER ================= */
+
+.act-divider {
+  min-height: 100vh;
+  background: radial-gradient(circle at center, #0a0a0a, #000);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.act-divider-content h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 48px;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.act-divider-content p {
+  font-size: 18px;
+  opacity: 0.8;
+  margin-bottom: 40px;
+}
+
+.next-act-btn {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.4);
+  background: transparent;
+  color: #fff;
+  font-size: 32px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.next-act-btn:hover {
+  background: #fff;
+  color: #000;
+  transform: translateX(6px);
+}
 
