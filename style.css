@@ -1,479 +1,78 @@
+/* RESET */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
 }
-
-body {
-  background: #0b0b0f;
-  color: #f5f5f5;
-  overflow-x: hidden;
-}
-
-section {
-  min-height: 100vh;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.song {
-  background-size: cover;
-  background-position: center;
-}
-
-.song::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-}
-
-.song-content {
-  position: relative;
-  max-width: 800px;
-  padding: 40px;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 1.2s ease;
-}
-
-.song-content.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.song h1 {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-}
-
-.song p {
-  font-size: 1.2rem;
-  line-height: 1.8;
-  color: #ddd;
-}
-body {
-  margin: 0;
-  font-family: 'Playfair Display', serif;
-  background: linear-gradient(180deg, #050505, #0b0b16);
-  color: #f5f5f5;
-  overflow-x: hidden;
-}
-
-.section {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  scroll-snap-align: start;
-  padding: 60px 20px;
-}
-
-img {
-  max-width: 320px;
-  border-radius: 20px;
-  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
-}
-
-h1, h2 {
-  letter-spacing: 1px;
-  text-align: center;
-}
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  scroll-snap-type: y mandatory;
-}
-/* ===== CINEMATIC BASE ===== */
 
 html, body {
-  margin: 0;
-  padding: 0;
   background: #050505;
   color: #f5f5f5;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Poppins', sans-serif;
   scroll-behavior: smooth;
   overflow-x: hidden;
 }
 
-/* Soft grain / film feel */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: url("https://grainy-gradients.vercel.app/noise.svg");
-  opacity: 0.04;
-  pointer-events: none;
-  z-index: 999;
-}
-
-/* ===== WELCOME SCREEN ===== */
-
-#welcome {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 40px;
-  background: radial-gradient(circle at top, #111, #000);
-  animation: fadeIn 2.5s ease forwards;
-}
-
-#welcome h1 {
-  font-size: 2.6rem;
-  letter-spacing: 1px;
-  margin-bottom: 20px;
-}
-
-#welcome p {
-  max-width: 720px;
-  font-size: 1.05rem;
-  line-height: 1.8;
-  opacity: 0.85;
-}
-
-#welcome input {
-  margin-top: 30px;
-  padding: 12px 20px;
-  font-size: 1rem;
-  border-radius: 30px;
-  border: none;
-  outline: none;
-  background: #111;
-  color: white;
-  text-align: center;
-}
-
-#welcome button {
-  margin-top: 15px;
-  padding: 10px 26px;
-  border-radius: 30px;
-  border: 1px solid #555;
-  background: transparent;
-  color: white;
-  cursor: pointer;
-  transition: all 0.4s ease;
-}
-
-#welcome button:hover {
-  background: white;
-  color: black;
-}
-
-/* ===== SONG SECTIONS ===== */
-
-.song {
-  min-height: 100vh;
-  padding: 120px 10%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 25px;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-
-.song img {
-  max-width: 320px;
-  border-radius: 16px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-}
-
-.song h2 {
-  font-size: 2rem;
-  letter-spacing: 0.5px;
-}
-
-.song .lyrics {
-  font-size: 1.1rem;
-  line-height: 1.9;
-  opacity: 0.85;
-  max-width: 700px;
-}
-
-/* ===== FADE ANIMATION ===== */
-
-.fade {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 1.4s ease;
-}
-
-.fade.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-/* ===== CINEMATIC SONG SCREEN ===== */
-
-.song-screen {
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.song-screen::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    circle at left,
-    rgba(255,255,255,0.08),
-    rgba(0,0,0,0.95)
-  );
-  filter: blur(40px);
-  z-index: 1;
-}
-
-.high-on-life {
-  background: linear-gradient(
-    135deg,
-    #1a1a1a,
-    #0a0a0a,
-    #000000
-  );
-}
-
-.song-container {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  gap: 80px;
-  align-items: center;
-  max-width: 1100px;
-  padding: 40px;
-}
-
-.album img {
-  width: 320px;
-  height: 320px;
-  object-fit: cover;
-  border-radius: 12px;
-  box-shadow: 0 30px 80px rgba(0,0,0,0.8);
-}
-
-.lyrics {
-  max-width: 500px;
-  color: #eaeaea;
-}
-
-.lyrics h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 42px;
-  margin-bottom: 10px;
-}
-
-.lyrics h3 {
-  font-size: 16px;
-  opacity: 0.7;
-  margin-bottom: 30px;
-}
-
-.lyrics p {
-  font-size: 18px;
-  line-height: 1.9;
-  opacity: 0.9;
-}
-
-/* Fade animation */
-.fade {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 1.5s ease;
-}
-
-.fade.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-.song {
-  position: relative;
-  min-height: 100vh;
-  overflow: hidden;
-}
-
-.song::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: var(--bg-image);
-  background-size: cover;
-  background-position: center;
-  filter: blur(60px) brightness(0.4);
-  transform: scale(1.2);
-  z-index: 1;
-}
-
-.song::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    circle at center,
-    rgba(0,0,0,0.2),
-    rgba(0,0,0,0.9)
-  );
-  z-index: 2;
-}
-
-.song-content {
-  position: relative;
-  z-index: 3;
-  display: flex;
-  align-items: center;
-  gap: 50px;
-  padding: 120px;
-}
-
-.song-content img {
-  width: 280px;
-  border-radius: 14px;
-  box-shadow: 0 40px 80px rgba(0,0,0,0.6);
-}
-
-.song-text {
-  max-width: 500px;
-  color: #fff;
-}
-
-.song-text h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 30px;
-  margin-bottom: 15px;
-}
-
-.song-text p {
-  font-size: 16px;
-  line-height: 1.8;
-  opacity: 0.9;
-}
-/* SONG BACKGROUND MOODS */
-
-.song {
-  min-height: 100vh;
-  padding: 80px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  transition: background 1.5s ease;
-}
-
-.song[data-mood="rose"] {
-  background: radial-gradient(circle at top, #3b1c2a, #0b0508);
-}
-
-.song[data-mood="amber"] {
-  background: radial-gradient(circle at top, #3a2a14, #0b0803);
-}
-
-.song[data-mood="crimson"] {
-  background: radial-gradient(circle at top, #3a0f18, #050102);
-}
-
-.song[data-mood="deepblue"] {
-  background: radial-gradient(circle at top, #0d1b2a, #020509);
-}
-
-.song[data-mood="teal"] {
-  background: radial-gradient(circle at top, #0d2b2b, #020707);
-}
-
-.song[data-mood="violet"] {
-  background: radial-gradient(circle at top, #23122e, #050207);
-}
-
-.song[data-mood="gold"] {
-  background: radial-gradient(circle at top, #3a2f0f, #050402);
-}
-
-.song[data-mood="midnight"] {
-  background: radial-gradient(circle at top, #05070d, #000000);
-}
-.lyrics span {
-  display: block;
-  opacity: 0;
-  transform: translateY(10px);
-  animation: lyricFade 1s ease forwards;
-}
-
-.lyrics span:nth-child(1) { animation-delay: 0.5s; }
-.lyrics span:nth-child(2) { animation-delay: 2s; }
-.lyrics span:nth-child(3) { animation-delay: 3.5s; }
-.lyrics span:nth-child(4) { animation-delay: 5s; }
-
-@keyframes lyricFade {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+/* HIDDEN */
 .hidden {
   display: none;
 }
 
-.song-screen {
-  min-height: 100vh;
+/* INTRO SCREEN */
+.intro-screen {
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   padding: 40px;
+  background: radial-gradient(circle at top, #111, #000);
 }
 
-.song-content {
-  display: flex;
-  gap: 30px;
-  max-width: 900px;
-  align-items: center;
-}
-
-.song-content img {
-  width: 260px;
-  border-radius: 12px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-}
-
-.song-text h2 {
+.intro-content h1 {
   font-family: 'Playfair Display', serif;
-  margin-bottom: 12px;
+  font-size: 36px;
+  margin-bottom: 20px;
 }
 
-.song-text p {
-  line-height: 1.7;
+.intro-content p {
+  max-width: 700px;
+  line-height: 1.8;
   opacity: 0.9;
 }
 
-/* MOOD BACKGROUNDS */
-.mood-rose { background: radial-gradient(circle, #3a1c2a, #0b0508); }
-.mood-blue { background: radial-gradient(circle, #102840, #020409); }
+.hint {
+  margin-top: 30px;
+  font-size: 14px;
+  opacity: 0.7;
+}
 
+.hint span {
+  border: 1px solid #777;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+/* STORY SCREENS */
 .story-screen {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: 20px;
   padding: 40px;
+  font-size: 20px;
   background: #050505;
-  opacity: 0.9;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1.2s ease;
 }
+
+.story-screen.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* SONG SCREENS */
 .song-screen {
   min-height: 100vh;
@@ -481,6 +80,14 @@ body::after {
   align-items: center;
   justify-content: center;
   padding: 60px 20px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1.2s ease;
+}
+
+.song-screen.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* SONG CONTENT */
@@ -493,14 +100,14 @@ body::after {
 
 .song-content img {
   width: 280px;
-  border-radius: 12px;
-  box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+  border-radius: 14px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.7);
 }
 
 .song-text h2 {
   font-family: 'Playfair Display', serif;
   font-size: 28px;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .song-text p {
@@ -509,18 +116,7 @@ body::after {
   opacity: 0.9;
 }
 
-/* STORY SCREENS */
-.story-screen {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 40px;
-  font-size: 18px;
-}
-
-/* COLOR MOODS */
+/* MOOD BACKGROUNDS */
 .mood-rose {
   background: radial-gradient(circle at top, #402030, #0b0508);
 }
@@ -529,7 +125,10 @@ body::after {
   background: radial-gradient(circle at top, #1e2a44, #05070d);
 }
 
-/* HIDDEN */
-.hidden {
-  display: none;
+.mood-amber {
+  background: radial-gradient(circle at top, #3a2a14, #050402);
+}
+
+.mood-soft-gold {
+  background: radial-gradient(circle at top, #3a2f0f, #050402);
 }
