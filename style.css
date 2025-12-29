@@ -370,4 +370,9 @@ body::after {
   );
 }
 
+/* ===== SCROLL LOCK ===== */
+body.lock-scroll {
+  height: 100vh;
+  overflow: hidden;
+}
 
