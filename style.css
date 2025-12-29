@@ -1,32 +1,34 @@
-/* ===== RESET ===== */
+/* RESET */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html, body {
+body {
   background: #050505;
   color: #f5f5f5;
   font-family: 'Poppins', sans-serif;
-  scroll-behavior: smooth;
   overflow-x: hidden;
 }
 
-/* ===== INTRO SCREEN ===== */
+/* HIDDEN */
+.hidden {
+  display: none;
+}
+
+/* INTRO */
 .intro-screen {
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: radial-gradient(circle at top, #111, #000);
+  padding: 40px;
 }
 
 .intro-content {
   max-width: 700px;
-  padding: 40px;
-  animation: fadeIn 2s ease;
 }
 
 .intro-content h1 {
@@ -36,24 +38,16 @@ html, body {
 }
 
 .intro-content p {
-  font-size: 16px;
   line-height: 1.8;
   opacity: 0.9;
 }
 
 .hint {
   margin-top: 30px;
-  font-size: 14px;
   opacity: 0.7;
 }
 
-.hint span {
-  border: 1px solid #777;
-  padding: 4px 10px;
-  border-radius: 6px;
-}
-
-/* ===== STORY SCREENS ===== */
+/* STORY SCREENS */
 .story-screen {
   min-height: 100vh;
   display: flex;
@@ -61,36 +55,25 @@ html, body {
   justify-content: center;
   text-align: center;
   padding: 40px;
-  font-size: 20px;
+  font-size: 18px;
   background: #050505;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 1.2s ease;
 }
 
-.story-screen.show {
-  opacity: 1;
-  transform: translateY(0);
+.story-screen p {
+  max-width: 700px;
+  line-height: 1.8;
 }
 
-/* ===== SONG SCREENS ===== */
+/* SONG SCREENS */
 .song-screen {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 60px 20px;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 1.2s ease;
 }
 
-.song-screen.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ===== SONG CONTENT ===== */
+/* SONG CONTENT */
 .song-content {
   display: flex;
   gap: 40px;
@@ -101,13 +84,13 @@ html, body {
 .song-content img {
   width: 280px;
   border-radius: 14px;
-  box-shadow: 0 30px 60px rgba(0,0,0,0.7);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.6);
 }
 
 .song-text h2 {
   font-family: 'Playfair Display', serif;
   font-size: 28px;
-  margin-bottom: 15px;
+  margin-bottom: 16px;
 }
 
 .song-text p {
@@ -116,7 +99,7 @@ html, body {
   opacity: 0.9;
 }
 
-/* ===== MOOD BACKGROUNDS ===== */
+/* MOODS */
 .mood-rose {
   background: radial-gradient(circle at top, #402030, #0b0508);
 }
@@ -126,23 +109,13 @@ html, body {
 }
 
 .mood-lavender {
-  background: radial-gradient(circle at top, #2a1e44, #070510);
+  background: radial-gradient(circle at top, #2a1e44, #08050d);
 }
 
 .mood-amber {
-  background: radial-gradient(circle at top, #3a2a14, #050402);
+  background: radial-gradient(circle at top, #3a2a14, #0b0803);
 }
 
 .mood-soft-gold {
-  background: radial-gradient(circle at top, #3a3218, #050403);
-}
-
-/* ===== UTIL ===== */
-.hidden {
-  display: none;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  background: radial-gradient(circle at top, #3a2f0f, #050402);
 }
