@@ -65,10 +65,10 @@ body {
   text-align: center;
   padding: 40px;
   font-size: 20px;
-  background: #050505;
+  background: radial-gradient(circle at center, #0d0d0d, #050505);
   opacity: 0;
   transform: translateY(40px);
-  transition: all 1.4s ease;
+  transition: all 2.2s ease;
 }
 
 .story-screen.show {
@@ -80,18 +80,33 @@ body {
 .song-screen {
   min-height: 100vh;
   width: 100%;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 60px 20px;
   opacity: 0;
   transform: translateY(40px);
-  transition: all 1.4s ease;
+  transition: all 2.2s ease;
+  overflow: hidden;
 }
 
 .song-screen.show {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ===== CINEMATIC DEPTH LAYER ===== */
+.song-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(255,255,255,0.08),
+    rgba(0,0,0,0.85)
+  );
+  z-index: 1;
 }
 
 /* ================= SONG CONTENT ================= */
@@ -107,7 +122,7 @@ body {
 .song-content img {
   width: 280px;
   border-radius: 14px;
-  box-shadow: 0 30px 60px rgba(0,0,0,0.7);
+  box-shadow: 0 30px 70px rgba(0,0,0,0.85);
 }
 
 .song-text h2 {
@@ -119,28 +134,28 @@ body {
 .song-text p {
   font-size: 16px;
   line-height: 1.8;
-  opacity: 0.9;
+  opacity: 0.92;
 }
 
-/* ================= COLOR MOODS (FIXED) ================= */
+/* ================= COLOR MOODS (FIXED & VISIBLE) ================= */
 .mood-rose {
-  background: radial-gradient(circle at top, #402030, #0b0508);
+  background: radial-gradient(circle at top, #4a1f2f, #0b0508);
 }
 
 .mood-blue {
-  background: radial-gradient(circle at top, #1e2a44, #05070d);
+  background: radial-gradient(circle at top, #1f3558, #05070d);
 }
 
 .mood-lavender {
-  background: radial-gradient(circle at top, #2a1e3d, #07040b);
+  background: radial-gradient(circle at top, #3a2a55, #07040b);
 }
 
 .mood-amber {
-  background: radial-gradient(circle at top, #3a2a14, #0b0803);
+  background: radial-gradient(circle at top, #5a3b14, #0b0803);
 }
 
 .mood-soft-gold {
-  background: radial-gradient(circle at top, #3a2f0f, #050402);
+  background: radial-gradient(circle at top, #6a541a, #050402);
 }
 
 /* ================= SOFT FILM GRAIN ================= */
@@ -149,7 +164,7 @@ body::after {
   position: fixed;
   inset: 0;
   background: url("https://grainy-gradients.vercel.app/noise.svg");
-  opacity: 0.04;
+  opacity: 0.035;
   pointer-events: none;
   z-index: 999;
 }
