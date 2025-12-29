@@ -36,35 +36,56 @@ document.addEventListener("DOMContentLoaded", () => {
 
   elements.forEach(el => observer.observe(el));
 
-  // ================= ACT NAVIGATION & SCROLL LOCK =================
+  // ================= ACT 2 LOCK & NAVIGATION =================
 
-const heartbeat = new Audio("assets/sounds/heartbeat.mp3");
-heartbeat.volume = 0.25;
-
-// Lock scroll initially after ACT 1
-let scrollLocked = true;
-document.body.style.overflowY = "hidden";
-
-// Unlock + move to ACT 2
-const act1Divider = document.getElementById("act1-divider");
 const act2Start = document.getElementById("act-2-start");
-const act1Btn = act1Divider?.querySelector(".next-act-btn");
+const act1Divider = document.getElementById("act1-divider");
+const act2Divider = document.getElementById("act2-divider");
 
-function unlockAndGoToAct2() {
-  heartbeat.currentTime = 0;
+let act2Unlocked = false;
+
+// Heartbeat sound
+const heartbeat = new Audio("assets/sounds/heartbeat.mp3");
+heartbeat.volume = 0.18;
+
+// Unlock ACT 2
+function unlockAct2() {
+  if (act2Unlocked) return;
+  act2Unlocked = true;
+
   heartbeat.play().catch(() => {});
-  scrollLocked = false;
-  document.body.style.overflowY = "auto";
 
-  act2Start.classList.remove("hidden");
-  act2Start.scrollIntoView({ behavior: "smooth" });
+  act2Start.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
 }
 
-act1Btn?.addEventListener("click", unlockAndGoToAct2);
+// Button click
+document.querySelectorAll("#act1-divider .next-act-btn").forEach(btn => {
+  btn.addEventListener("click", unlockAct2);
+});
 
 // Keyboard →
 document.addEventListener("keydown", (e) => {
-  if (e.key === "ArrowRight" && scrollLocked) {
-    unlockAndGoToAct2();
+  if (e.key === "ArrowRight" && isElementInViewport(act1Divider)) {
+    unlockAct2();
   }
 });
+
+// Prevent scroll into ACT 2 until unlocked
+window.addEventListener("scroll", () => {
+  if (!act2Unlocked && act2Start) {
+    const rect = act2Start.getBoundingClientRect();
+    if (rect.top < window.innerHeight) {
+      act1Divider.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+});
+
+// Helper
+function isElementInViewport(el) {
+  if (!el) return false;
+  const rect = el.getBoundingClientRect();
+  return rect.top >= 0 && rect.bottom <= window.innerHeight + 150;
+}
