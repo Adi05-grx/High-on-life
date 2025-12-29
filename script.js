@@ -7,13 +7,20 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ================= INTRO ENTER ================= */
   document.addEventListener("keydown", (e) => {
     if (e.key === "Enter" && introScreen && !introScreen.classList.contains("hidden")) {
+      // Hide intro and show songs
       introScreen.classList.add("hidden");
       songsWrapper.classList.remove("hidden");
+      
+      // CRITICAL FIX: Force scroll to top so it doesn't jump to the divider
+      window.scrollTo(0, 0);
+      
+      // Enable scrolling
       document.body.style.overflowY = "auto";
     }
   });
 
   /* ================= FADE IN OBSERVER ================= */
+  // We select elements again after wrapper is shown to ensure they are tracked
   const elements = document.querySelectorAll(".story-screen, .song-screen, .act-divider");
 
   const observer = new IntersectionObserver(
@@ -29,12 +36,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   elements.forEach(el => observer.observe(el));
 
-  /* ================= ACT DIVIDER SOUND ================= */
+  /* ================= ACT DIVIDER SOUND & NAVIGATION ================= */
   const actSound = new Audio("assets/sounds/transition.mp3");
   actSound.volume = 0.25;
 
   function goToNextAct() {
     actSound.play().catch(() => {});
+    
+    // If you have a second page for Act 2, uncomment the line below:
+    // window.location.href = "act2.html"; 
+
+    // Otherwise, scroll to next element if it exists
     const next = act1Divider?.nextElementSibling;
     if (next) {
       next.scrollIntoView({ behavior: "smooth" });
@@ -46,9 +58,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* → key support */
   document.addEventListener("keydown", (e) => {
+    // Only trigger if the divider is actually visible on screen
     if (e.key === "ArrowRight" && act1Divider) {
       const rect = act1Divider.getBoundingClientRect();
-      if (rect.top >= 0 && rect.bottom <= window.innerHeight + 150) {
+      const isVisible = rect.top < window.innerHeight && rect.bottom >= 0;
+      if (isVisible) {
         goToNextAct();
       }
     }
