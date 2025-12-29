@@ -38,3 +38,9 @@ document.addEventListener("keydown", (e) => {
     ambientPlayed = true;
   }
 });
+function goToAct2() {
+  const act2 = document.getElementById("act2-start");
+  if (act2) {
+    act2.scrollIntoView({ behavior: "smooth" });
+  }
+}
