@@ -219,41 +219,55 @@ body::after {
 
 .act-divider {
   min-height: 100vh;
-  background: radial-gradient(circle at center, #0a0a0a, #000);
   display: flex;
   align-items: center;
   justify-content: center;
+  background: radial-gradient(circle at center, #0b0b12, #000);
   text-align: center;
 }
 
-.act-divider-content h2 {
+.act-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  animation: fadeInAct 2s ease forwards;
+}
+
+.act-line {
   font-family: 'Playfair Display', serif;
-  font-size: 48px;
-  letter-spacing: 2px;
-  margin-bottom: 10px;
+  font-size: 26px;
+  letter-spacing: 0.5px;
+  opacity: 0.85;
 }
 
-.act-divider-content p {
-  font-size: 18px;
-  opacity: 0.8;
-  margin-bottom: 40px;
-}
-
-.next-act-btn {
-  width: 70px;
-  height: 70px;
+.act-button {
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   border: 1px solid rgba(255,255,255,0.4);
   background: transparent;
-  color: #fff;
-  font-size: 32px;
+  color: white;
+  font-size: 28px;
   cursor: pointer;
   transition: all 0.4s ease;
 }
 
-.next-act-btn:hover {
-  background: #fff;
-  color: #000;
-  transform: translateX(6px);
+.act-button:hover {
+  background: white;
+  color: black;
+  transform: scale(1.1);
 }
+
+@keyframes fadeInAct {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 
