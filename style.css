@@ -168,3 +168,69 @@ body::after {
   pointer-events: none;
   z-index: 999;
 }
+/* ================= LINE-BY-LINE LYRIC FADE ================= */
+
+.song-text p span {
+  display: block;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: lyricFadeIn 1.2s ease forwards;
+}
+
+/* Stagger animation automatically */
+.song-text p span:nth-child(1) { animation-delay: 0.4s; }
+.song-text p span:nth-child(2) { animation-delay: 1.6s; }
+.song-text p span:nth-child(3) { animation-delay: 2.8s; }
+.song-text p span:nth-child(4) { animation-delay: 4s; }
+.song-text p span:nth-child(5) { animation-delay: 5.2s; }
+.song-text p span:nth-child(6) { animation-delay: 6.4s; }
+
+@keyframes lyricFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* ================= MOBILE POLISH ================= */
+
+@media (max-width: 768px) {
+  .song-content {
+    flex-direction: column;
+    gap: 25px;
+    text-align: center;
+  }
+
+  .song-content img {
+    width: 220px;
+  }
+
+  .song-text h2 {
+    font-size: 22px;
+  }
+
+  .song-text p {
+    font-size: 15px;
+  }
+
+  .story-screen {
+    font-size: 18px;
+    padding: 30px 20px;
+  }
+}
+/* ================= ACT SEPARATORS ================= */
+
+.act-separator {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: radial-gradient(circle, #111, #000);
+}
+
+.act-separator h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  letter-spacing: 2px;
+  opacity: 0.8;
+}
