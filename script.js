@@ -6,24 +6,26 @@ document.addEventListener("DOMContentLoaded", () => {
   let activeDivider = null;
   let scrollLocked = false;
 
-  /* ================= INTRO : ENTER ================= */
-  document.addEventListener("keydown", (e) => {
+ /* ================= INTRO : ENTER ================= */
+document.addEventListener("keydown", (e) => {
   if (
     e.key === "Enter" &&
     introScreen &&
     !introScreen.classList.contains("hidden")
   ) {
+    introScreen.classList.add("hidden");
+    songsWrapper.classList.remove("hidden");
 
-      introScreen.classList.add("hidden");
-      songsWrapper.classList.remove("hidden");
+    // Enable scroll
+    document.body.style.overflow = "auto";
 
-      // Jump to first story
+    // Jump to first story cleanly
+    requestAnimationFrame(() => {
       const firstStory = document.querySelector(".story-screen");
       firstStory?.scrollIntoView({ behavior: "smooth" });
-
-      document.body.style.overflowY = "auto";
-    }
-  });
+    });
+  }
+});
 
   /* ================= FADE-IN ================= */
   const fadeElements = document.querySelectorAll(
