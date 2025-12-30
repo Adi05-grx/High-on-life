@@ -574,3 +574,19 @@ body.page-exit-left {
   background: radial-gradient(circle at top, #3a2a2f, #080405);
 }
 
+/* ===== ENTER FIX VISIBILITY ===== */
+.intro-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+}
+
+.intro-screen.hidden {
+  display: none !important;
+}
+
+.songs-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
