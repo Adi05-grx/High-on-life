@@ -101,6 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ================= CHAPTER TRANSITION : ACT 3 → ACT 4 ================= */
 
+  if (document.body.classList.contains("chapter-page")) {
   const chapter1 = document.getElementById("chapter-1");
   const chapter2 = document.getElementById("chapter-2");
   const nextChapterBtn = document.querySelector(".next-chapter-btn");
@@ -112,7 +113,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!chapter1 || !chapter2) return;
 
     chapterSound.play().catch(() => {});
-
     document.body.classList.add("lock-scroll");
 
     chapter1.classList.add("exit-left");
@@ -125,10 +125,5 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   nextChapterBtn?.addEventListener("click", goToNextChapter);
+}
 
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowRight" && nextChapterBtn) {
-      goToNextChapter();
-    }
-  });
-});
