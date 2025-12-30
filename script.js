@@ -19,8 +19,9 @@ document.addEventListener("keydown", (e) => {
     // Show songs
     songsWrapper.classList.remove("hidden");
 
-    // Enable scrolling
-    document.body.style.overflow = "auto";
+    // CRITICAL FIX: Ensure body allows scrolling and reset position
+    document.body.style.overflowY = "auto";
+    document.body.style.overflowX = "hidden";
 
     // Jump to first story AFTER render
     setTimeout(() => {
@@ -61,7 +62,8 @@ document.addEventListener("keydown", (e) => {
 
   function unlockScroll() {
     scrollLocked = false;
-    document.body.style.overflow = "auto";
+    document.body.style.overflowY = "auto";
+    document.body.style.overflowX = "hidden";
   }
 
   /* ================= ACT DIVIDER DETECTION ================= */
@@ -135,4 +137,4 @@ document.addEventListener("keydown", (e) => {
 
   nextChapterBtn?.addEventListener("click", goToNextChapter);
 }
-
+});
