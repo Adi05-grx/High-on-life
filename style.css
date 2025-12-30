@@ -524,3 +524,19 @@ body.page-exit-left {
 body.scroll-active {
     overflow-y: auto !important;
 }
+
+/* ================= ACT 5 DIVIDER (DARKER) ================= */
+
+.act5-divider {
+  background: radial-gradient(
+    circle at center,
+    #080205,
+    #000000
+  );
+}
+
+.act5-divider p {
+  font-size: 22px;
+  letter-spacing: 0.5px;
+  opacity: 0.95;
+}
