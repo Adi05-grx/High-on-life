@@ -128,3 +128,30 @@ act3NextBtns.forEach(btn => {
     }, 1200);
   });
 });
+/* ================= CHAPTER TRANSITION SOUND ================= */
+
+const chapterSound = new Audio("assets/sounds/ambient-swell.mp3");
+chapterSound.volume = 0.25;
+
+function goToChapter2() {
+  chapterSound.play().catch(() => {});
+  document.getElementById("chapter-2")?.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}
+
+/* Trigger when ACT 3 divider arrow clicked */
+document.querySelectorAll("#act3-divider .next-act-btn").forEach(btn => {
+  btn.addEventListener("click", goToChapter2);
+});
+
+/* Keyboard → support */
+document.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowRight") {
+    const act3Divider = document.getElementById("act3-divider");
+    if (act3Divider && isElementInViewport(act3Divider)) {
+      goToChapter2();
+    }
+  }
+});
