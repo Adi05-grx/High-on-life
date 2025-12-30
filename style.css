@@ -18,12 +18,14 @@ body {
 
 /* ================= HIDDEN ================= */
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 /* ================= INTRO SCREEN ================= */
 .intro-screen {
-  height: 100vh;
+  position: fixed; /* FIXED: Keeps intro on top of everything */
+  inset: 0;
+  z-index: 9999; /* FIXED: Higher z-index to stay above background music/noise */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -137,7 +139,7 @@ body {
   opacity: 0.92;
 }
 
-/* ================= COLOR MOODS (FIXED & VISIBLE) ================= */
+/* ================= COLOR MOODS ================= */
 .mood-rose {
   background: radial-gradient(circle at top, #4a1f2f, #0b0508);
 }
@@ -169,7 +171,6 @@ body {
 .mood-violet {
   background: radial-gradient(circle at top, #23122e, #050207);
 }
-
 
 .mood-midnight {
   background: radial-gradient(circle at top, #0b1320, #020409);
@@ -507,82 +508,11 @@ body.lock-scroll {
   animation: fadeInSlow 2.5s ease forwards;
 }
 
-/* ================= CHAPTER TRANSITION ================= */
-
-/* === ONLY FOR chapter2.html === */
-body.chapter-page .chapter {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  min-height: 100vh;
-  background: #050505;
-  transform: translateX(100%);
-  transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
-  overflow-y: auto;
-}
-
-body.chapter-page .chapter.active {
-  transform: translateX(0);
-  z-index: 2;
-}
-
-body.chapter-page .chapter.exit-left {
-  transform: translateX(-100%);
-  z-index: 1;
-}
-
-
-.chapter.active {
-  transform: translateX(0);
-  z-index: 2;
-}
-
-.chapter.exit-left {
-  transform: translateX(-100%);
-  z-index: 1;
-}
-
-/* Prevent scroll during transition */
-body.lock-scroll {
-  overflow: hidden;
-}
-
-/* ===== PAGE SLIDE TRANSITION ===== */
+/* ================= PAGE SLIDE FIX ================= */
 
 body.page-exit-left {
-  animation: pageSlideOut 0.9s ease forwards;
-}
-
-@keyframes pageSlideOut {
-  from {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  to {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-}
-
-/* ===== ACT 5 & 6 MOODS ===== */
-.mood-violet-fade {
-  background: radial-gradient(circle at top, #2b1f3a, #07040b);
-}
-
-.mood-rose-grey {
-  background: radial-gradient(circle at top, #3a2a2f, #080405);
-}
-
-/* ===== ENTER FIX VISIBILITY ===== */
-.intro-screen {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-}
-
-.intro-screen.hidden {
-  display: none !important;
+  transition: transform 0.9s ease-in-out;
+  transform: translateX(-100%);
 }
 
 .songs-wrapper {
@@ -590,3 +520,7 @@ body.page-exit-left {
   z-index: 1;
 }
 
+/* Ensure visibility after intro */
+body.scroll-active {
+    overflow-y: auto !important;
+}
