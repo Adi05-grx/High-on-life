@@ -535,3 +535,20 @@ body.lock-scroll {
 body.lock-scroll {
   overflow: hidden;
 }
+
+/* ===== PAGE SLIDE TRANSITION ===== */
+
+body.page-exit-left {
+  animation: pageSlideOut 0.9s ease forwards;
+}
+
+@keyframes pageSlideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
