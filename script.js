@@ -101,3 +101,30 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+/* ================= CHAPTER SWITCH : ACT 3 → ACT 4 ================= */
+
+const chapter1 = document.getElementById("chapter-1");
+const chapter2 = document.getElementById("chapter-2");
+
+const act3NextBtns = document.querySelectorAll(
+  "#act3-divider .next-act-btn"
+);
+
+act3NextBtns.forEach(btn => {
+  btn.addEventListener("click", () => {
+    // Lock scroll during transition
+    document.body.style.overflow = "hidden";
+
+    // Slide chapter 1 out
+    chapter1.classList.add("chapter-exit-left");
+
+    // Bring chapter 2 in
+    chapter2.classList.add("chapter-active");
+
+    // Reset scroll AFTER animation
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+      document.body.style.overflowY = "auto";
+    }, 1200);
+  });
+});
