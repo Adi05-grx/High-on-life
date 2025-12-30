@@ -155,3 +155,37 @@ document.addEventListener("keydown", (e) => {
     }
   }
 });
+
+/* ================= CHAPTER TRANSITION LOGIC ================= */
+
+const chapter1 = document.getElementById("chapter-1");
+const chapter2 = document.getElementById("chapter-2");
+const nextChapterBtn = document.querySelector(".next-chapter-btn");
+
+function goToNextChapter() {
+  if (!chapter1 || !chapter2) return;
+
+  // Lock scroll
+  document.body.classList.add("lock-scroll");
+
+  // Slide chapter 1 out
+  chapter1.classList.add("exit-left");
+
+  // Slide chapter 2 in
+  chapter2.classList.add("active");
+
+  // Reset scroll AFTER transition
+  setTimeout(() => {
+    chapter2.scrollTop = 0;
+    document.body.classList.remove("lock-scroll");
+  }, 1200);
+}
+
+nextChapterBtn?.addEventListener("click", goToNextChapter);
+
+// Keyboard →
+document.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowRight" && nextChapterBtn) {
+    goToNextChapter();
+  }
+});
