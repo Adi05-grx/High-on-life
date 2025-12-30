@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
       introScreen.classList.add("hidden");
       songsWrapper.classList.remove("hidden");
 
-      // Jump directly to first story
+      // Jump to first story
       const firstStory = document.querySelector(".story-screen");
       firstStory?.scrollIntoView({ behavior: "smooth" });
 
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   fadeElements.forEach((el) => fadeObserver.observe(el));
 
-  /* ================= SCROLL LOCK CORE ================= */
+  /* ================= SCROLL LOCK ================= */
 
   function lockScroll() {
     if (scrollLocked) return;
@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.style.overflow = "auto";
   }
 
-  /* ================= ACT DIVIDER OBSERVER ================= */
+  /* ================= ACT DIVIDER DETECTION ================= */
 
   const dividerObserver = new IntersectionObserver(
     (entries) => {
@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   actDividers.forEach((divider) => dividerObserver.observe(divider));
 
-  /* ================= GO TO NEXT ACT ================= */
+  /* ================= NEXT ACT (SCROLL) ================= */
 
   function goNextAct() {
     if (!activeDivider) return;
@@ -89,103 +89,46 @@ document.addEventListener("DOMContentLoaded", () => {
     activeDivider = null;
   }
 
-  /* ================= BUTTON SUPPORT ================= */
   document.querySelectorAll(".next-act-btn").forEach((btn) => {
     btn.addEventListener("click", goNextAct);
   });
 
-  /* ================= KEYBOARD → SUPPORT ================= */
   document.addEventListener("keydown", (e) => {
     if (e.key === "ArrowRight" && scrollLocked) {
       goNextAct();
     }
   });
-});
-/* ================= CHAPTER SWITCH : ACT 3 → ACT 4 ================= */
 
-const chapter1 = document.getElementById("chapter-1");
-const chapter2 = document.getElementById("chapter-2");
+  /* ================= CHAPTER TRANSITION : ACT 3 → ACT 4 ================= */
 
-const act3NextBtns = document.querySelectorAll(
-  "#act3-divider .next-act-btn"
-);
+  const chapter1 = document.getElementById("chapter-1");
+  const chapter2 = document.getElementById("chapter-2");
+  const nextChapterBtn = document.querySelector(".next-chapter-btn");
 
-act3NextBtns.forEach(btn => {
-  btn.addEventListener("click", () => {
-    // Lock scroll during transition
-    document.body.style.overflow = "hidden";
+  const chapterSound = new Audio("assets/sounds/ambient-swell.mp3");
+  chapterSound.volume = 0.25;
 
-    // Slide chapter 1 out
-    chapter1.classList.add("chapter-exit-left");
+  function goToNextChapter() {
+    if (!chapter1 || !chapter2) return;
 
-    // Bring chapter 2 in
-    chapter2.classList.add("chapter-active");
+    chapterSound.play().catch(() => {});
 
-    // Reset scroll AFTER animation
+    document.body.classList.add("lock-scroll");
+
+    chapter1.classList.add("exit-left");
+    chapter2.classList.add("active");
+
     setTimeout(() => {
-      window.scrollTo(0, 0);
-      document.body.style.overflowY = "auto";
+      chapter2.scrollTop = 0;
+      document.body.classList.remove("lock-scroll");
     }, 1200);
-  });
-});
-/* ================= CHAPTER TRANSITION SOUND ================= */
+  }
 
-const chapterSound = new Audio("assets/sounds/ambient-swell.mp3");
-chapterSound.volume = 0.25;
+  nextChapterBtn?.addEventListener("click", goToNextChapter);
 
-function goToChapter2() {
-  chapterSound.play().catch(() => {});
-  document.getElementById("chapter-2")?.scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-  });
-}
-
-/* Trigger when ACT 3 divider arrow clicked */
-document.querySelectorAll("#act3-divider .next-act-btn").forEach(btn => {
-  btn.addEventListener("click", goToChapter2);
-});
-
-/* Keyboard → support */
-document.addEventListener("keydown", (e) => {
-  if (e.key === "ArrowRight") {
-    const act3Divider = document.getElementById("act3-divider");
-    if (act3Divider && isElementInViewport(act3Divider)) {
-      goToChapter2();
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight" && nextChapterBtn) {
+      goToNextChapter();
     }
-  }
-});
-
-/* ================= CHAPTER TRANSITION LOGIC ================= */
-
-const chapter1 = document.getElementById("chapter-1");
-const chapter2 = document.getElementById("chapter-2");
-const nextChapterBtn = document.querySelector(".next-chapter-btn");
-
-function goToNextChapter() {
-  if (!chapter1 || !chapter2) return;
-
-  // Lock scroll
-  document.body.classList.add("lock-scroll");
-
-  // Slide chapter 1 out
-  chapter1.classList.add("exit-left");
-
-  // Slide chapter 2 in
-  chapter2.classList.add("active");
-
-  // Reset scroll AFTER transition
-  setTimeout(() => {
-    chapter2.scrollTop = 0;
-    document.body.classList.remove("lock-scroll");
-  }, 1200);
-}
-
-nextChapterBtn?.addEventListener("click", goToNextChapter);
-
-// Keyboard →
-document.addEventListener("keydown", (e) => {
-  if (e.key === "ArrowRight" && nextChapterBtn) {
-    goToNextChapter();
-  }
+  });
 });
