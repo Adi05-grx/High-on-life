@@ -379,22 +379,93 @@ body.lock-scroll {
 /* ================= CHAPTER TRANSITION ================= */
 
 .chapter {
-  position: absolute;
-  top: 0;
-  left: 100%;
-  width: 100%;
   min-height: 100vh;
+  width: 100%;
+  position: relative;
   background: #050505;
-  transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
-.chapter-active {
-  left: 0;
-  transform: translateX(0);
-  z-index: 2;
+/* Slide-in effect */
+.chapter-2 {
+  animation: chapterSlideIn 1.4s ease forwards;
 }
 
-.chapter-exit-left {
-  transform: translateX(-100%);
-  z-index: 1;
+@keyframes chapterSlideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* ================= CHAPTER TITLE ================= */
+
+.chapter-title {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+  background: radial-gradient(circle at center, #0b0b14, #000);
+  animation: fadeInSlow 2.2s ease forwards;
+}
+
+.chapter-title h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 42px;
+  margin-bottom: 20px;
+}
+
+.chapter-title p {
+  font-size: 18px;
+  opacity: 0.85;
+  line-height: 1.8;
+}
+
+/* ACT 4 MOODS */
+.mood-deep-blue {
+  background: radial-gradient(circle at top, #0d1b2a, #020509);
+}
+
+.mood-midnight {
+  background: radial-gradient(circle at top, #05070d, #000);
+}
+/* ===== ACT 4 MOODS ===== */
+
+.mood-cold-blue {
+  background: radial-gradient(circle at top, #1a2a3a, #05070d);
+}
+
+.mood-midnight {
+  background: radial-gradient(circle at top, #0a0f1c, #000000);
+}
+
+.mood-violet-fade {
+  background: radial-gradient(circle at top, #2b1f3a, #07040b);
+}
+
+.mood-rose-grey {
+  background: radial-gradient(circle at top, #3a2a2f, #080405);
+}
+
+/* ACT TITLE */
+.act-title {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: radial-gradient(circle, #0b0b12, #000);
+}
+
+.act-title h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 46px;
+  line-height: 1.3;
+  opacity: 0;
+  animation: fadeInSlow 2.5s ease forwards;
 }
