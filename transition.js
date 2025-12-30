@@ -16,3 +16,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+document.querySelectorAll(".next-act-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const target = btn.dataset.target;
+    if (!target) return;
+
+    const el = document.getElementById(target);
+    el?.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+});
