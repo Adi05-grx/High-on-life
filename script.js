@@ -8,11 +8,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ================= INTRO : ENTER ================= */
   document.addEventListener("keydown", (e) => {
-    if (
-      e.key === "Enter" &&
-      introScreen &&
-      !introScreen.classList.contains("hidden")
-    ) {
+  if (
+    e.key === "Enter" &&
+    introScreen &&
+    !introScreen.classList.contains("hidden")
+  ) {
+
       introScreen.classList.add("hidden");
       songsWrapper.classList.remove("hidden");
 
