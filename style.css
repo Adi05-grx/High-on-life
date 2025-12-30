@@ -574,7 +574,3 @@ body.page-exit-left {
   background: radial-gradient(circle at top, #3a2a2f, #080405);
 }
 
-/* === SONGS WRAPPER VISIBILITY FIX === */
-.songs-wrapper {
-  display: block;
-}
