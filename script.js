@@ -1,98 +1,103 @@
 document.addEventListener("DOMContentLoaded", () => {
-
   const introScreen = document.getElementById("intro-screen");
   const songsWrapper = document.getElementById("songs-wrapper");
 
-  const firstStory = document.querySelector(".story-screen");
-
   const actDividers = document.querySelectorAll(".act-divider");
-
+  let activeDivider = null;
   let scrollLocked = false;
 
-  /* ================= INTRO → SONG 1 ================= */
-
+  /* ================= INTRO : ENTER ================= */
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" && !introScreen.classList.contains("hidden")) {
+    if (
+      e.key === "Enter" &&
+      introScreen &&
+      !introScreen.classList.contains("hidden")
+    ) {
       introScreen.classList.add("hidden");
       songsWrapper.classList.remove("hidden");
 
-      // Hard jump to first story
-      setTimeout(() => {
-        firstStory.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 100);
+      // Jump directly to first story
+      const firstStory = document.querySelector(".story-screen");
+      firstStory?.scrollIntoView({ behavior: "smooth" });
 
       document.body.style.overflowY = "auto";
     }
   });
 
-  /* ================= FADE IN ================= */
+  /* ================= FADE-IN ================= */
+  const fadeElements = document.querySelectorAll(
+    ".story-screen, .song-screen, .act-divider"
+  );
 
   const fadeObserver = new IntersectionObserver(
     (entries) => {
-      entries.forEach(entry => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("show");
         }
       });
     },
-    { threshold: 0.15 }
+    { threshold: 0.2 }
   );
 
-  document
-    .querySelectorAll(".story-screen, .song-screen, .act-divider")
-    .forEach(el => fadeObserver.observe(el));
+  fadeElements.forEach((el) => fadeObserver.observe(el));
 
   /* ================= SCROLL LOCK CORE ================= */
 
   function lockScroll() {
     if (scrollLocked) return;
     scrollLocked = true;
-    document.body.style.overflowY = "hidden";
+    document.body.style.overflow = "hidden";
   }
 
   function unlockScroll() {
     scrollLocked = false;
-    document.body.style.overflowY = "auto";
+    document.body.style.overflow = "auto";
   }
 
-  /* ================= ACT DIVIDER BEHAVIOR ================= */
+  /* ================= ACT DIVIDER OBSERVER ================= */
 
-  actDividers.forEach(divider => {
+  const dividerObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          activeDivider = entry.target;
+          lockScroll();
+        }
+      });
+    },
+    { threshold: 0.6 }
+  );
 
-    const nextBtn = divider.querySelector(".next-act-btn");
+  actDividers.forEach((divider) => dividerObserver.observe(divider));
 
-    // Lock scroll when divider enters view
-    const dividerObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            lockScroll();
-          }
-        });
-      },
-      { threshold: 0.6 }
-    );
+  /* ================= GO TO NEXT ACT ================= */
 
-    dividerObserver.observe(divider);
+  function goNextAct() {
+    if (!activeDivider) return;
 
-    function goNext() {
-      unlockScroll();
+    const nextSection = activeDivider.nextElementSibling;
+    if (!nextSection) return;
 
-      const nextSection = divider.nextElementSibling;
-      if (nextSection) {
-        nextSection.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }
+    unlockScroll();
 
-    // Click →
-    nextBtn.addEventListener("click", goNext);
-
-    // Keyboard →
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowRight" && scrollLocked) {
-        goNext();
-      }
+    nextSection.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
     });
+
+    activeDivider = null;
+  }
+
+  /* ================= BUTTON SUPPORT ================= */
+  document.querySelectorAll(".next-act-btn").forEach((btn) => {
+    btn.addEventListener("click", goNextAct);
   });
 
+  /* ================= KEYBOARD → SUPPORT ================= */
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight" && scrollLocked) {
+      goNextAct();
+    }
+  });
 });
