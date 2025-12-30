@@ -2,12 +2,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const introScreen = document.getElementById("intro-screen");
   const songsWrapper = document.getElementById("songs-wrapper");
 
-  const firstStory = document.querySelector(".story-screen"); // SONG 1 message
-  const actDividers = document.querySelectorAll(".act-divider");
+  const firstStory = document.querySelector(".story-screen");
 
-  let scrollLocked = false;
+  const act1Divider = document.getElementById("act1-divider");
+  const act2Start = document.getElementById("act-2-start");
 
-  /* ================= INTRO → SONG 1 ================= */
+  const act2Divider = document.getElementById("act2-divider");
+  const act3Start = document.getElementById("act-3-start");
+
+  /* ================= INTRO → SONG 1 (ENTER) ================= */
+
   document.addEventListener("keydown", (e) => {
     if (
       e.key === "Enter" &&
@@ -19,17 +23,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
       document.body.style.overflowY = "auto";
 
-      // 🔥 DIRECT JUMP TO SONG 1 MESSAGE
+      // 🚀 DIRECT JUMP TO SONG 1 MESSAGE
       setTimeout(() => {
         firstStory.scrollIntoView({
           behavior: "smooth",
           block: "start",
         });
-      }, 50);
+      }, 100);
     }
   });
 
-  /* ================= FADE-IN OBSERVER ================= */
+  /* ================= FADE IN ================= */
+
   const fadeElements = document.querySelectorAll(
     ".story-screen, .song-screen, .act-divider"
   );
@@ -42,75 +47,71 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
     },
-    { threshold: 0.2 }
+    { threshold: 0.15 }
   );
 
   fadeElements.forEach((el) => observer.observe(el));
 
-  /* ================= SCROLL LOCK ================= */
-  function lockScroll() {
-    if (scrollLocked) return;
-    scrollLocked = true;
-    document.body.style.overflow = "hidden";
-  }
+  /* ================= ACT 1 → ACT 2 ================= */
 
-  function unlockScroll() {
-    scrollLocked = false;
-    document.body.style.overflow = "auto";
-  }
+  let act2Unlocked = false;
 
-  /* ================= ACT DIVIDER LOGIC ================= */
-
-  // Ambient / heartbeat sound
   const heartbeat = new Audio("assets/sounds/heartbeat.mp3");
-  heartbeat.volume = 0.2;
+  heartbeat.volume = 0.18;
 
-  actDividers.forEach((divider) => {
-    const nextBtn = divider.querySelector(".next-act-btn");
-    const nextSection = divider.nextElementSibling;
+  function goToAct2() {
+    if (act2Unlocked) return;
+    act2Unlocked = true;
 
-    // Lock scroll when divider is visible
-    const dividerObserver = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          lockScroll();
-        }
-      },
-      { threshold: 0.6 }
-    );
+    heartbeat.play().catch(() => {});
 
-    dividerObserver.observe(divider);
-
-    function goNext() {
-      heartbeat.play().catch(() => {});
-      unlockScroll();
-
-      // 🔥 DIRECT JUMP TO NEXT ACT
-      nextSection?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
-
-    // Click →
-    nextBtn?.addEventListener("click", goNext);
-
-    // Keyboard →
-    document.addEventListener("keydown", (e) => {
-      if (
-        e.key === "ArrowRight" &&
-        scrollLocked &&
-        isElementInViewport(divider)
-      ) {
-        goNext();
-      }
+    act2Start.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
     });
+  }
+
+  document
+    .querySelectorAll("#act1-divider .next-act-btn")
+    .forEach((btn) => btn.addEventListener("click", goToAct2));
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight" && isVisible(act1Divider)) {
+      goToAct2();
+    }
   });
 
-  /* ================= HELPER ================= */
-  function isElementInViewport(el) {
+  /* ================= ACT 2 → ACT 3 ================= */
+
+  let act3Unlocked = false;
+
+  function goToAct3() {
+    if (act3Unlocked) return;
+    act3Unlocked = true;
+
+    heartbeat.play().catch(() => {});
+
+    act3Start.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }
+
+  document
+    .querySelectorAll("#act2-divider .next-act-btn")
+    .forEach((btn) => btn.addEventListener("click", goToAct3));
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight" && isVisible(act2Divider)) {
+      goToAct3();
+    }
+  });
+
+  /* ================= HELPERS ================= */
+
+  function isVisible(el) {
+    if (!el) return false;
     const rect = el.getBoundingClientRect();
-    return rect.top < window.innerHeight * 0.6 &&
-           rect.bottom > window.innerHeight * 0.4;
+    return rect.top < window.innerHeight * 0.6 && rect.bottom > window.innerHeight * 0.4;
   }
 });
