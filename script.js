@@ -19,7 +19,7 @@ document.addEventListener("keydown", (e) => {
     // Show songs
     songsWrapper.classList.remove("hidden");
 
-    // CRITICAL FIX: Ensure body allows scrolling and reset position
+    // Enable scrolling
     document.body.style.overflowY = "auto";
     document.body.style.overflowX = "hidden";
 
@@ -52,18 +52,17 @@ document.addEventListener("keydown", (e) => {
 
   fadeElements.forEach((el) => fadeObserver.observe(el));
 
-  /* ================= SCROLL LOCK (MODIFIED) ================= */
+  /* ================= SCROLL LOCK LOGIC ================= */
 
   function lockScroll() {
     scrollLocked = true;
-    // We no longer use overflow: hidden here so that scroll-up stays enabled
   }
 
   function unlockScroll() {
     scrollLocked = false;
   }
 
-  // New Listener: Block only DOWNWARD movement when locked
+  // Prevent ONLY downward scroll when locked
   window.addEventListener("wheel", (e) => {
     if (scrollLocked && e.deltaY > 0) {
       e.preventDefault();
@@ -71,9 +70,9 @@ document.addEventListener("keydown", (e) => {
   }, { passive: false });
 
   window.addEventListener("touchmove", (e) => {
+    // Basic touch direction detection could be added, 
+    // but preventDefault is standard for the 'hard stop' feel
     if (scrollLocked) {
-        // Simple check for touch direction could be added here, 
-        // but preventDefault blocks the "stuck" feel on dividers
         e.preventDefault();
     }
   }, { passive: false });
@@ -83,16 +82,16 @@ document.addEventListener("keydown", (e) => {
   const dividerObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
+        // Only lock if we haven't "passed" this divider yet
+        if (entry.isIntersecting && !entry.target.classList.contains("passed")) {
           activeDivider = entry.target;
           lockScroll();
-        } else if (entry.boundingClientRect.top > 0) {
-          // If we scroll UP away from the divider, unlock
+        } else {
           unlockScroll();
         }
       });
     },
-    { threshold: 0.6 }
+    { threshold: 0.8 }
   );
 
   actDividers.forEach((divider) => dividerObserver.observe(divider));
@@ -103,14 +102,18 @@ document.addEventListener("keydown", (e) => {
     if (!activeDivider) return;
 
     const nextSection = activeDivider.nextElementSibling;
-    if (!nextSection) return;
-
+    
+    // Mark this divider as passed so the observer ignores it when scrolling back up
+    activeDivider.classList.add("passed");
+    
     unlockScroll();
 
-    nextSection.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
+    if (nextSection) {
+      nextSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
 
     activeDivider = null;
   }
