@@ -19,7 +19,7 @@ document.addEventListener("keydown", (e) => {
     // Show songs
     songsWrapper.classList.remove("hidden");
 
-    // Enable scrolling
+    // CRITICAL FIX: Ensure body allows scrolling and reset position
     document.body.style.overflowY = "auto";
     document.body.style.overflowX = "hidden";
 
@@ -52,17 +52,21 @@ document.addEventListener("keydown", (e) => {
 
   fadeElements.forEach((el) => fadeObserver.observe(el));
 
-  /* ================= SCROLL LOCK LOGIC ================= */
+  /* ================= SCROLL LOCK ================= */
 
   function lockScroll() {
+    if (scrollLocked) return;
     scrollLocked = true;
+    // Removed overflow:hidden to allow scroll-up logic below
   }
 
   function unlockScroll() {
     scrollLocked = false;
+    document.body.style.overflowY = "auto";
+    document.body.style.overflowX = "hidden";
   }
 
-  // Prevent ONLY downward scroll when locked
+  // FIX: ONLY block downward scrolling when locked
   window.addEventListener("wheel", (e) => {
     if (scrollLocked && e.deltaY > 0) {
       e.preventDefault();
@@ -70,10 +74,9 @@ document.addEventListener("keydown", (e) => {
   }, { passive: false });
 
   window.addEventListener("touchmove", (e) => {
-    // Basic touch direction detection could be added, 
-    // but preventDefault is standard for the 'hard stop' feel
     if (scrollLocked) {
-        e.preventDefault();
+      // On mobile, we block touch move at the divider for the 'hard stop'
+      e.preventDefault();
     }
   }, { passive: false });
 
@@ -82,16 +85,19 @@ document.addEventListener("keydown", (e) => {
   const dividerObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        // Only lock if we haven't "passed" this divider yet
-        if (entry.isIntersecting && !entry.target.classList.contains("passed")) {
-          activeDivider = entry.target;
-          lockScroll();
+        if (entry.isIntersecting) {
+          // Only lock if we are entering the divider from the top (scrolling down)
+          if (entry.boundingClientRect.top > 0) {
+            activeDivider = entry.target;
+            lockScroll();
+          }
         } else {
+          // If the divider leaves the screen, ensure we aren't locked anymore
           unlockScroll();
         }
       });
     },
-    { threshold: 0.8 }
+    { threshold: 0.6 }
   );
 
   actDividers.forEach((divider) => dividerObserver.observe(divider));
@@ -102,18 +108,14 @@ document.addEventListener("keydown", (e) => {
     if (!activeDivider) return;
 
     const nextSection = activeDivider.nextElementSibling;
-    
-    // Mark this divider as passed so the observer ignores it when scrolling back up
-    activeDivider.classList.add("passed");
-    
+    if (!nextSection) return;
+
     unlockScroll();
 
-    if (nextSection) {
-      nextSection.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
+    nextSection.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
 
     activeDivider = null;
   }
