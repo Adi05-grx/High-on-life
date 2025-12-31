@@ -562,3 +562,37 @@ body.scroll-active {
     opacity: 0.6;
   }
 }
+/* ===== ACT 5 : PROTECTION & ASSURANCE ===== */
+
+.mood-act5-intro {
+  background: radial-gradient(circle, #061a1a, #020808);
+}
+
+.mood-act5-hurricane {
+  background: radial-gradient(circle at center, #0e2a2a, #020707);
+}
+
+.mood-act5-carry {
+  background: radial-gradient(circle at top, #0b3a3a, #020808);
+}
+
+.mood-act5-carry-soft {
+  background: radial-gradient(circle at center, #1a3a4a, #04090d);
+}
+
+.mood-act5-there {
+  background: radial-gradient(circle at top, #123a3a, #030808);
+}
+
+.mood-act5-real-love {
+  background: radial-gradient(circle at center, #1e4a4a, #040a0a);
+}
+
+.mood-act5-fix {
+  background: radial-gradient(circle at center, #e6e6e6, #8faea6);
+  color: #111;
+}
+
+.mood-act5-fix .song-text {
+  color: #111;
+}
