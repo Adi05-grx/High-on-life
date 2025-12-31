@@ -632,3 +632,44 @@ body.scroll-active {
     rgba(0,0,0,0.6)
   );
 }
+
+/* ================= ACT 6 — FAITH & HOPE ================= */
+
+/* Don’t You Worry Child — sky blue / calm reassurance */
+.mood-act6-sky {
+  background:
+    radial-gradient(circle at top, rgba(180,220,255,0.45), transparent 60%),
+    linear-gradient(180deg, #9fc7e8, #eaf4ff);
+  color: #0b1b2b;
+}
+
+/* Angels For Each Other — soft monochrome / warmth */
+.mood-act6-mono {
+  background:
+    radial-gradient(circle at center, rgba(255,255,255,0.35), transparent 60%),
+    linear-gradient(180deg, #e7e7e7, #cfcfcf);
+  color: #111;
+}
+
+.mood-act6-mono .song-text {
+  color: #111;
+}
+
+/* Burn Out — neon dusk / hope through exhaustion */
+.mood-act6-dusk {
+  background:
+    radial-gradient(circle at 60% 40%, rgba(120,160,255,0.35), transparent 60%),
+    linear-gradient(180deg, #2b2e4a, #0f1020);
+}
+
+/* These Are The Times — soft home / comfort */
+.mood-act6-home {
+  background:
+    radial-gradient(circle at top, rgba(200,220,255,0.4), transparent 60%),
+    linear-gradient(180deg, #f1f1f1, #dcdcdc);
+  color: #111;
+}
+
+.mood-act6-home .song-text {
+  color: #111;
+}
