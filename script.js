@@ -52,19 +52,31 @@ document.addEventListener("keydown", (e) => {
 
   fadeElements.forEach((el) => fadeObserver.observe(el));
 
-  /* ================= SCROLL LOCK ================= */
+  /* ================= SCROLL LOCK (MODIFIED) ================= */
 
   function lockScroll() {
-    if (scrollLocked) return;
     scrollLocked = true;
-    document.body.style.overflow = "hidden";
+    // We no longer use overflow: hidden here so that scroll-up stays enabled
   }
 
   function unlockScroll() {
     scrollLocked = false;
-    document.body.style.overflowY = "auto";
-    document.body.style.overflowX = "hidden";
   }
+
+  // New Listener: Block only DOWNWARD movement when locked
+  window.addEventListener("wheel", (e) => {
+    if (scrollLocked && e.deltaY > 0) {
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+  window.addEventListener("touchmove", (e) => {
+    if (scrollLocked) {
+        // Simple check for touch direction could be added here, 
+        // but preventDefault blocks the "stuck" feel on dividers
+        e.preventDefault();
+    }
+  }, { passive: false });
 
   /* ================= ACT DIVIDER DETECTION ================= */
 
@@ -74,6 +86,9 @@ document.addEventListener("keydown", (e) => {
         if (entry.isIntersecting) {
           activeDivider = entry.target;
           lockScroll();
+        } else if (entry.boundingClientRect.top > 0) {
+          // If we scroll UP away from the divider, unlock
+          unlockScroll();
         }
       });
     },
