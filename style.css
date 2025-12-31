@@ -673,3 +673,34 @@ body.scroll-active {
 .mood-act6-home .song-text {
   color: #111;
 }
+
+/* ================= ACT 7 & 8 MOODS ================= */
+
+.mood-act7-starlight {
+  background:
+    radial-gradient(circle at top, rgba(180,160,255,0.35), transparent 60%),
+    linear-gradient(180deg, #120b2a, #05020d);
+}
+
+.mood-act7-dusk {
+  background:
+    radial-gradient(circle at center, rgba(120,140,200,0.35), transparent 60%),
+    linear-gradient(180deg, #0b1324, #020409);
+}
+
+.mood-act8-gold {
+  background:
+    radial-gradient(circle at center, rgba(255,220,140,0.45), transparent 60%),
+    linear-gradient(180deg, #1a1406, #050402);
+}
+
+.mood-act8-sunrise {
+  background:
+    radial-gradient(circle at top, rgba(255,255,255,0.7), transparent 60%),
+    linear-gradient(180deg, #f5e9d8, #c9a86a);
+  color: #1a1a1a;
+}
+
+.mood-act8-sunrise .song-text {
+  color: #1a1a1a;
+}
