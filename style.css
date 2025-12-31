@@ -573,16 +573,23 @@ body.scroll-active {
 /* Hurricane — fire / protection */
 .mood-hurricane {
   background:
-    radial-gradient(circle at 30% 40%, rgba(255,90,40,0.35), transparent 55%),
-    linear-gradient(180deg, #120404, #050101);
+    radial-gradient(circle at top, rgba(255, 80, 60, 0.45), transparent 55%),
+    radial-gradient(circle at bottom, rgba(120, 10, 10, 0.6), transparent 60%),
+    linear-gradient(180deg, #2a0404, #070101);
 }
 
 /* Real Love — warm human intimacy */
 .mood-real-love {
   background:
-    radial-gradient(circle at center, rgba(255,210,170,0.35), transparent 55%),
-    linear-gradient(180deg, #1a120d, #060302);
+    radial-gradient(circle at center, rgba(240, 240, 240, 0.55), transparent 55%),
+    linear-gradient(180deg, #e6e6e6, #9e9e9e);
+  color: #1a1a1a;
 }
+
+.mood-real-love .song-text {
+  color: #1a1a1a;
+}
+
 
 /* Carry You — deep teal / strength */
 .mood-carry-you {
@@ -594,9 +601,11 @@ body.scroll-active {
 /* Fix You — dark → golden hope */
 .mood-fix-you {
   background:
-    radial-gradient(circle at bottom, rgba(255,200,120,0.35), transparent 60%),
-    linear-gradient(180deg, #050505, #120a03);
+    radial-gradient(circle at center, rgba(255, 200, 120, 0.4), transparent 55%),
+    radial-gradient(circle at bottom, rgba(255, 255, 255, 0.15), transparent 65%),
+    linear-gradient(180deg, #0a0a0a, #020202);
 }
+
 /* ACT 5 — Alex Warren: Carry You (warm human reassurance) */
 .mood-carry-you-warm {
   background:
