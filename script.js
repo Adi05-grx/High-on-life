@@ -155,6 +155,23 @@ document.addEventListener("keydown", (e) => {
     }, 1200);
   }
 
+    /* ================= CHAPTER TRANSITION : ACT 6 → ACT 7 ================= */
+
+if (document.body.classList.contains("chapter-page")) {
+  const nextChapterBtn = document.querySelector(".next-chapter-btn");
+
+  if (nextChapterBtn) {
+    nextChapterBtn.addEventListener("click", () => {
+      document.body.classList.add("page-exit-left");
+
+      setTimeout(() => {
+        window.location.href = "chapter3.html";
+      }, 900);
+    });
+  }
+}
+
+
   nextChapterBtn?.addEventListener("click", goToNextChapter);
 }
 });
