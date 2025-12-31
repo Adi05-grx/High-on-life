@@ -568,31 +568,44 @@ body.scroll-active {
   background: radial-gradient(circle, #061a1a, #020808);
 }
 
-.mood-act5-hurricane {
-  background: radial-gradient(circle at center, #0e2a2a, #020707);
+/* ================= ACT 5 MOODS ================= */
+
+/* Hurricane — fire / protection */
+.mood-hurricane {
+  background:
+    radial-gradient(circle at 30% 40%, rgba(255,90,40,0.35), transparent 55%),
+    linear-gradient(180deg, #120404, #050101);
 }
 
-.mood-act5-carry {
-  background: radial-gradient(circle at top, #0b3a3a, #020808);
+/* Real Love — warm human intimacy */
+.mood-real-love {
+  background:
+    radial-gradient(circle at center, rgba(255,210,170,0.35), transparent 55%),
+    linear-gradient(180deg, #1a120d, #060302);
 }
 
-.mood-act5-carry-soft {
-  background: radial-gradient(circle at center, #1a3a4a, #04090d);
+/* Carry You — deep teal / strength */
+.mood-carry-you {
+  background:
+    radial-gradient(circle at top, rgba(40,200,190,0.25), transparent 60%),
+    linear-gradient(180deg, #031818, #010606);
 }
 
-.mood-act5-there {
-  background: radial-gradient(circle at top, #123a3a, #030808);
+/* Fix You — dark → golden hope */
+.mood-fix-you {
+  background:
+    radial-gradient(circle at bottom, rgba(255,200,120,0.35), transparent 60%),
+    linear-gradient(180deg, #050505, #120a03);
 }
 
-.mood-act5-real-love {
-  background: radial-gradient(circle at center, #1e4a4a, #040a0a);
-}
 
-.mood-act5-fix {
-  background: radial-gradient(circle at center, #e6e6e6, #8faea6);
-  color: #111;
-}
+/* ================= ACT 5 OVERRIDE ================= */
 
-.mood-act5-fix .song-text {
-  color: #111;
+/* Kill cold overlay for ACT 5 */
+.act-5 .song-screen::before {
+  background: radial-gradient(
+    circle at center,
+    rgba(255,255,255,0.04),
+    rgba(0,0,0,0.6)
+  );
 }
