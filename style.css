@@ -597,6 +597,20 @@ body.scroll-active {
     radial-gradient(circle at bottom, rgba(255,200,120,0.35), transparent 60%),
     linear-gradient(180deg, #050505, #120a03);
 }
+/* ACT 5 — Alex Warren: Carry You (warm human reassurance) */
+.mood-carry-you-warm {
+  background:
+    radial-gradient(circle at top, rgba(255, 200, 150, 0.35), transparent 55%),
+    linear-gradient(180deg, #2a1c14, #050302);
+}
+
+/* ACT 5 — There For You (protective night calm) */
+.mood-there-for-you {
+  background:
+    radial-gradient(circle at center, rgba(120, 160, 255, 0.25), transparent 55%),
+    linear-gradient(180deg, #050914, #000000);
+}
+
 
 
 /* ================= ACT 5 OVERRIDE ================= */
